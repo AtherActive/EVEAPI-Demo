@@ -14,16 +14,16 @@ def PrintData(id):
    Name:           {}              
                                    
    Buy Orders:                     
-       Average:{}                  
-       Volume: {}
-       Max:    {}
-       Min:    {}                  
+       Average:{:,}                  
+       Volume: {:,}
+       Max:    {:,}
+       Min:    {:,}                  
                                    
    Sell Orders:                    
-       Average:{}                  
-       Volume: {}
-       Max:    {}
-       Min:    {}                                               
+       Average:{:,}                  
+       Volume: {:,}
+       Max:    {:,}
+       Min:    {:,}                                               
 ************-Market Info-************
 '''
           .format(
