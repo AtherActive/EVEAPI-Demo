@@ -15,6 +15,7 @@ def ImportMarketData():
     ******************************************
     ''')
 
+
     d = 0
     with open('typeids.csv', encoding='cp850') as f:
         d = dict(filter(None, csv.reader(f)))
