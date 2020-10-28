@@ -4,14 +4,34 @@ import json as js
 import requests as rq
 import structures as str
 import settings
+import csv
 
 
-def UpdateMarketValues(data, id=-1):
+# Updates Item-list
+def ImportMarketData():
+    print('''
+    ******************************************
+    * Market Data is being imported. Hold on *
+    ******************************************
+    ''')
+
+    d = 0
+    with open('typeids.csv', encoding='cp850') as f:
+        d = dict(filter(None, csv.reader(f)))
+
+    if settings.developerMode == 1:
+        print(d)
+
+    return d
+
+
+def UpdateMarketValues(data, name, id=-1):
     # create structure for storage purposes
     dataStruct = str.MarketItem
 
     # sets all values.....
     dataStruct.itemID = id
+    dataStruct.friendlyName = name
 
     dataStruct.buyValues.avgPrice = data[0]['buy']['avg']
     dataStruct.buyValues.volume = data[0]['buy']['volume']
@@ -37,9 +57,9 @@ def UpdateMarketValues(data, id=-1):
     return dataStruct
 
 # does what it says. Takes the data form the API.
-def PullDataFromAPI(id):
+def PullDataFromAPI(name):
 
-    url = 'https://api.evemarketer.com/ec/marketstat/json?typeid={}'.format(id)
+    url = 'https://api.evemarketer.com/ec/marketstat/json?typeid={}'.format(PullItemID(name))
     data = rq.get(url)
     jsData = data.json()
 
@@ -47,7 +67,20 @@ def PullDataFromAPI(id):
         str.PrintS("Received from {}: ".format(url), jsData)
 
 
-    itemStruct = UpdateMarketValues(jsData, id)
+    itemStruct = UpdateMarketValues(jsData, name, PullItemID(name))
 
     return itemStruct
+
+def PullItemID(itemname):
+
+    output = 0
+
+    try:
+        output = itemDB.get(itemname)
+    except:
+        print('Something went wrong.')
+
+    return output
+
+itemDB = ImportMarketData()
 

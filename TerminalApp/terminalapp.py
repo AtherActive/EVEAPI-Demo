@@ -4,6 +4,7 @@ import settings
 import main as api
 import TerminalApp.terminal_messages as msg
 
+
 def PrintData(id):
 
 
@@ -48,17 +49,30 @@ def retry():
     else:
         exit(0)
 
+def app_pre():
+    api.ImportMarketData()
+    return
 
 def app_start():
     print(msg.startup)
+    id = -1
 
-    id = input(msg.inputValue)
+    name = input(msg.inputValue)
+
     print(msg.loading)
-    PrintData(id)
+    try:
+        PrintData(name)
+    except:
+        print('''
+        *************************************************
+        *An error occurred. Did you spell the name right?*
+        *************************************************
+        ''')
+        app_start()
 
     retry()
     return 0
 
 
+app_pre()
 app_start()
-
