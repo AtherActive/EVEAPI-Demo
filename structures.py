@@ -12,10 +12,10 @@ class ItemValues:
 @dataclass
 class MarketItem:
     itemID = -1
-    friendlyName = "none"
+    friendlyName = "unknown"
 
-    buyValues = ItemValues
-    sellValues = ItemValues
+    buyValues = ItemValues()
+    sellValues = ItemValues()
 
 def PrintS(message, content):
     if message == "":

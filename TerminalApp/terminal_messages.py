@@ -14,7 +14,20 @@ Created by IAmSalt Salty! Get me an In-game Coffee :D
 '''
 
 inputValue = '''
+*********************
+* Input Item ID now *
+*********************
+'''
+
+retry = '''
+         *******************
+         * Run another ID? *
+         * Y = Yes, N = No *
+         *******************
+'''
+
+loading = '''
 *******************
-*Input Item ID now*
+* Processing Data *
 *******************
 '''

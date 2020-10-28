@@ -3,7 +3,7 @@
 #This file is mostly some settings for debug and other things. Yeah that's it.
 
 # Toggle DEV Mode for debugging
-developerMode = 1
+developerMode = 0
 
 #Auto-update
 autoUpdate = 0
