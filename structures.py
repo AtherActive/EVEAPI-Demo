@@ -16,3 +16,9 @@ class MarketItem:
 
     buyValues = ItemValues
     sellValues = ItemValues
+
+def PrintS(message, content):
+    if message == "":
+        message = "Message: "
+    else:
+        print(message, content)
