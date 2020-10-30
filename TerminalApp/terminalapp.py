@@ -6,10 +6,10 @@ import TerminalApp.terminal_messages as msg
 
 
 def PrintData(id):
-
+    url  = 'https://evemarketer.com/types/{}'.format(api.PullDataFromAPI(id).itemID)
 
     print('''
-************-Market Info-************
+****************-Market Info-****************
    Processed Item: {}
    Name:           {}              
                                    
@@ -23,8 +23,10 @@ def PrintData(id):
        Average:{:,}                  
        Volume: {:,}
        Max:    {:,}
-       Min:    {:,}                                               
-************-Market Info-************
+       Min:    {:,}    
+       
+   URL: {}                                           
+****************-Market Info-****************
 '''
           .format(
         api.PullDataFromAPI(id).itemID,
@@ -37,7 +39,8 @@ def PrintData(id):
         api.PullDataFromAPI(id).sellValues.avgPrice,
         api.PullDataFromAPI(id).sellValues.volume,
         api.PullDataFromAPI(id).sellValues.maxPrice,
-        api.PullDataFromAPI(id).sellValues.minPrice
+        api.PullDataFromAPI(id).sellValues.minPrice,
+        url
                   )
     )
 
