@@ -8,6 +8,7 @@ import TerminalApp.terminal_messages as msg
 def PrintData(id):
     url  = 'https://evemarketer.com/types/{}'.format(api.PullDataFromAPI(id).itemID)
 
+# Due to a bug I have to request the data again for every field. Otherwise it for some reason cannot read buy data.
     print('''
 ****************-Market Info-****************
    Processed Item: {}
