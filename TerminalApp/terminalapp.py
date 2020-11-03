@@ -6,9 +6,10 @@ import TerminalApp.terminal_messages as msg
 
 
 def PrintData(id):
-    url  = 'https://evemarketer.com/types/{}'.format(api.PullDataFromAPI(id).itemID)
+    url = 'https://evemarketer.com/types/{}'.format(api.PullDataFromAPI(id).itemID)
 
-# Due to a bug I have to request the data again for every field. Otherwise it for some reason cannot read buy data.
+# Due to a bug I have to request the data again for every field. Otherwise it for some reason cannot read data.
+# A fix is coming later once Flutter is up and running.
     print('''
 ****************-Market Info-****************
    Processed Item: {}
