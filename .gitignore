@@ -125,4 +125,4 @@ dmypy.json
 .pyre/
 
 # PYcharm stuf...
-/.idea
+.idea

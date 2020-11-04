@@ -22,3 +22,16 @@ def PrintS(message, content):
         message = "Message: "
     else:
         print(message, content)
+
+@dataclass
+class Incursion:
+    constellation_id = -1
+    constellation_name = 'undefined'
+
+    staging = -1
+    staging_name = 'undefined'
+
+    systems_id = []
+    systems_names = []
+    region_name = 'undefined'
+    status = 'unknown'

@@ -1,8 +1,6 @@
 #Created by IAmSalt Salty
-
-import settings
 import main as api
-import TerminalApp.terminal_messages as msg
+import terminal_messages as msg
 
 
 def PrintData(id):
