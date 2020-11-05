@@ -28,7 +28,7 @@ def PrintData(data):
     data[id].systems_names,
     data[id].status))
     id = id +1
-
+# ^^^ As od right now this system is being replaced and is NOT working.
 
 def retry():
     choice = input(msg.retry)
