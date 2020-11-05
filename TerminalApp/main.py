@@ -70,6 +70,7 @@ def PullDataFromAPI(name):
 
     return itemStruct
 
+# Finds Item ID needed for pulling market data.
 def PullItemID(itemname):
 
     output = 0
@@ -87,44 +88,57 @@ itemDB = ImportMarketData()
 #Incursion related stuff
 
 def PullIncursionData():
-    #Pulls data from URL
+    #Pulls data from URL and converts it into JSON
     url = 'https://esi.evetech.net/latest/incursions/?datasource=tranquility'
     data = rq.get(url)
-
     jsData = data.json()
-    length = len(jsData)
-    print(length)
 
-
+    #Init var to store incursions
     incursions = []
-    for i in range(length):
-        icstruct = str.Incursion
 
-        icstruct.constellation_id = jsData[i]['constellation_id']
-        icstruct.constellation_name = 'none'
-        icstruct.staging = jsData[i]['staging_solar_system_id']
-        icstruct.region_name = ResolveSystemNames(icstruct.constellation_id, 'con-reg')
-        icstruct.status = jsData[i]['state']
-        icstruct.systems_id = jsData[i]['infested_solar_systems']
-        icstruct.systems_names = ResolveSystemNames(jsData[i]['infested_solar_systems'], 'system')
-        incursions.append(icstruct)
-        print(incursions[i].region_name)
+    #Set lenght for loop. yay
+    length = len(jsData)
+
+    # Every loop incursion data will be read by __parseIncursionData(). It then gets added to var Incursions.
+    for i in range(length):
+        # Add data to var Incursion.
+        incursions.append(__parseIncursionData(jsData, i))
+        
+        # If Dev mode, print some debug. Can be toggled in settings.py
+        if settings.developerMode == 1:
+            print(incursions)
 
     return incursions
 
+# Basically parses the input data in a decent manner. No comments needed really.
+def __parseIncursionData(jsData, i):
+    icstruct = str.Incursion
+
+    icstruct.constellation_id = jsData[i]['constellation_id']
+    icstruct.constellation_name = 'none'
+    icstruct.staging = jsData[i]['staging_solar_system_id']
+    icstruct.region_name = ResolveSystemNames(icstruct.constellation_id, 'con-reg')
+    icstruct.status = jsData[i]['state']
+    icstruct.systems_id = jsData[i]['infested_solar_systems']
+    icstruct.systems_names = ResolveSystemNames(jsData[i]['infested_solar_systems'], 'system')
+
+    return icstruct
+    
+# Resolves names for systems, regions and constellations. Still WIP.
 def ResolveSystemNames(id, mode='constellation'):
-    temp = id
+    #init value
     output_name = 'none'
 
-    
+    # If constellation, pull data and find region name.
     if mode == 'con-reg':
         url = 'https://www.fuzzwork.co.uk/api/mapdata.php?constellationid={}&format=json'.format(id)
         data = rq.get(url)
         jsData = data.json()
         output_name = jsData[0]['regionname']
-
+    
+    # Pulls system name form Fuzzwork.co.uk. 
     elif mode == 'system':
- 
+        #Convert output to a list.
         output_name = []
         lenght = len(id)
 
@@ -136,3 +150,6 @@ def ResolveSystemNames(id, mode='constellation'):
             output_name.append(jsData[i]['solarsystemname'])
     
     return output_name
+
+
+PullIncursionData()
