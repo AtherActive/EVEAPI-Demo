@@ -25,6 +25,7 @@ def ImportMarketData():
     return d
 
 
+
 def UpdateMarketValues(data, name, id=-1):
     # create structure for storage purposes
     dataStruct = str.MarketItem
