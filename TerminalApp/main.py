@@ -7,6 +7,7 @@ import settings
 import csv
 
 
+
 # Market related stuff
 def ImportMarketData():
     print('''
@@ -16,7 +17,7 @@ def ImportMarketData():
     ''')
 
     d = 0
-    with open('/home/saltylelele/EVEAPI-Demo/TerminalApp/typeids.csv', encoding='cp850') as f:
+    with open('typeids.csv', encoding='cp850') as f:
         d = dict(filter(None, csv.reader(f)))
     if settings.developerMode == 1:
         print(d)
@@ -106,7 +107,7 @@ def PullIncursionData():
         
         # If Dev mode, print some debug. Can be toggled in settings.py
         if settings.developerMode == 1:
-            print(incursions)
+            print(incursions[i].constellation_id)
 
     return incursions
 
@@ -151,5 +152,9 @@ def ResolveSystemNames(id, mode='constellation'):
     
     return output_name
 
+icdata = list(PullIncursionData())
+print('external data check:')
+length = len(icdata)
 
-PullIncursionData()
+for i in range(length):
+    print(icdata[i].constellation_id)
