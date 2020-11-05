@@ -1,4 +1,4 @@
-#Created by IAmSalt Salty
+# Created by IAmSalt Salty. Owned by AtherActive
 import main as api
 import terminal_messages as msg
 

@@ -1,4 +1,4 @@
-# Created by IAmSalt Salty
+# Created by IAmSalt Salty. Owned by AtherActive
 
 from dataclasses import dataclass
 

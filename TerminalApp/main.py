@@ -1,4 +1,4 @@
-# Created by IAmSalt Salty with help of the EVEMarketer-API.
+# Created by IAmSalt Salty. Owned by AtherActive
 
 import json as js
 import requests as rq
@@ -142,7 +142,7 @@ def ResolveSystemNames(id, mode='constellation'):
         #Convert output to a list.
         output_name = []
         lenght = len(id)
-
+        # Pulls system name from Fuzzwork. Not that hard.
         for i in range(lenght):
             url = 'https://www.fuzzwork.co.uk/api/mapdata.php?solarsystemid={}&format=json'.format(id[i])
             data = rq.get(url)

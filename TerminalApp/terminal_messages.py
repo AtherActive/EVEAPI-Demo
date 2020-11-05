@@ -1,4 +1,4 @@
-#Created by IAmSalt Salty
+# Created by IAmSalt Salty. Owned by AtherActive
 
 # This file contains messages used by the terminal app to declutter that file :D
 
