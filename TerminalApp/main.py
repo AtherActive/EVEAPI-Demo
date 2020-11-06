@@ -152,10 +152,11 @@ def ResolveSystemNames(id, mode='constellation'):
             output_name.append(jsData[i]['solarsystemname'])
     
     return output_name
+if settings.developerMode == 1:
 
-icdata = PullIncursionData()
-print('external data check:')
-length = len(icdata)
+    icdata = PullIncursionData()
+    print('external data check:')
+    length = len(icdata)
 
-for i in range(length):
-    print(icdata[i].constellation_id)
+    for i in range(length):
+        print(icdata[i].constellation_id)

@@ -22,11 +22,11 @@ def PrintData(data):
 *   Status:        {}
 ************Incursion Status************
     '''.format(
-    data[id].constellation_name,
-    data[id].staging_name,
-    data[id].region_name,
-    data[id].systems_names,
-    data[id].status))
+    data[i].constellation_name,
+    data[i].staging_name,
+    data[i].region_name,
+    data[i].systems_names,
+    data[i].status))
     id = id +1
 # ^^^ As of right now this system is being replaced and is NOT working.
 
