@@ -28,7 +28,7 @@ def ImportMarketData():
 
 def UpdateMarketValues(data, name, id=-1):
     # create structure for storage purposes
-    dataStruct = stru.MarketItem
+    dataStruct = stru.MarketItem()
 
     # sets all values.....
     dataStruct.itemID = id
@@ -114,7 +114,7 @@ def PullIncursionData():
 
 # Basically parses the input data in a decent manner. No comments needed really.
 def __parseIncursionData(jsData, i):
-    icstruct = stru.Incursion
+    icstruct = stru.Incursion()
 
     icstruct.constellation_id = jsData[i]['constellation_id']
     icstruct.constellation_name = 'none'

@@ -38,7 +38,6 @@ def retry():
         exit(0)
 
 def app_pre():
-    api.ImportMarketData()
     app_start()
     return
 
