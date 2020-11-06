@@ -20,16 +20,28 @@ class MarketItem:
 
 @dataclass
 class Incursion:
-    constellation_id = -1
-    constellation_name = 'undefined'
+    constellation_id = int
+    constellation_name = str
 
-    staging = -1
-    staging_name = 'undefined'
+    staging = int
+    staging_name = str
 
-    systems_id = []
-    systems_names = []
-    region_name = 'undefined'
-    status = 'unknown'
+    systems_id = list
+    systems_names = list
+    region_name = str
+    status = str
+
+    def ___init___(self):
+        self.constellation_id = -1
+        self.constellation_name = 'undefined'
+
+        self.staging = -1
+        self.staging_name = 'undefined'
+
+        self.systems_id = []
+        self.systems_names = []
+        self.region_name = 'undefined'
+        self.status = 'unknown'
 
 def PrintS(message, content):
     if message == "":
