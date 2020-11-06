@@ -2,7 +2,7 @@
 
 import json as js
 import requests as rq
-import structures as str
+import structures as stru
 import settings
 import csv
 
@@ -28,7 +28,7 @@ def ImportMarketData():
 
 def UpdateMarketValues(data, name, id=-1):
     # create structure for storage purposes
-    dataStruct = str.MarketItem
+    dataStruct = stru.MarketItem
 
     # sets all values.....
     dataStruct.itemID = id
@@ -65,7 +65,7 @@ def PullDataFromAPI(name):
     jsData = data.json()
 
     if settings.developerMode == 1:
-        str.PrintS("Received from {}: ".format(url), jsData)
+        stru.PrintS("Received from {}: ".format(url), jsData)
 
 
     itemStruct = UpdateMarketValues(jsData, name, PullItemID(name))
@@ -114,7 +114,7 @@ def PullIncursionData():
 
 # Basically parses the input data in a decent manner. No comments needed really.
 def __parseIncursionData(jsData, i):
-    icstruct = str.Incursion
+    icstruct = stru.Incursion
 
     icstruct.constellation_id = jsData[i]['constellation_id']
     icstruct.constellation_name = 'none'
