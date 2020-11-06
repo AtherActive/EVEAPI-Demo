@@ -153,7 +153,7 @@ def ResolveSystemNames(id, mode='constellation'):
     
     return output_name
 
-icdata = list(PullIncursionData())
+icdata = PullIncursionData()
 print('external data check:')
 length = len(icdata)
 

@@ -17,11 +17,6 @@ class MarketItem:
     buyValues = ItemValues()
     sellValues = ItemValues()
 
-def PrintS(message, content):
-    if message == "":
-        message = "Message: "
-    else:
-        print(message, content)
 
 @dataclass
 class Incursion:
@@ -35,3 +30,9 @@ class Incursion:
     systems_names = []
     region_name = 'undefined'
     status = 'unknown'
+
+def PrintS(message, content):
+    if message == "":
+        message = "Message: "
+    else:
+        print(message, content)
