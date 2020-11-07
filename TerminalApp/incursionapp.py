@@ -4,7 +4,7 @@ import terminal_messages as msg
 from time import sleep
 
 
-def PrintData(data):
+def PrintData():
     data = api.PullIncursionData()
     id = 0
     lenght = len(data)
@@ -42,7 +42,10 @@ def app_pre():
     return
 
 def app_start():
-    PrintData('no')
+    PrintData()
+    print('Refreshing in 60 seconds!')
+    sleep(60)
+    app_pre()
     return 0
 
 

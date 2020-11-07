@@ -84,7 +84,7 @@ def PullItemID(itemname):
 
     return output
 
-itemDB = ImportMarketData()
+# itemDB = ImportMarketData()
 
 
 #Incursion related stuff
@@ -123,6 +123,7 @@ def __parseIncursionData(jsData, i):
     icstruct.status = jsData[i]['state']
     icstruct.systems_id = jsData[i]['infested_solar_systems']
     icstruct.systems_names = ResolveSystemNames(jsData[i]['infested_solar_systems'], 'system')
+    icstruct.staging_name = ResolveSystemNames(jsData[i]['staging_solar_system_id'])
 
     return icstruct
     
