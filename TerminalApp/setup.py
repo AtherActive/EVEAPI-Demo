@@ -28,7 +28,7 @@ def app_start():
     * The script will do some required setup *
     * now. (Installing dependencies.)        *
     *                                        *
-    * Type "start" once you are ready!       *
+    *    Type "start" once you are ready!    *
     ******************************************
     ''')
 

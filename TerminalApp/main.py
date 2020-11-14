@@ -89,28 +89,32 @@ def PullItemID(itemname):
 
 #Incursion related stuff
 
-def PullIncursionData():
+def PullIncursionData(method=str('EVEPY')):
     #Pulls data from URL and converts it into JSON
     url = 'https://esi.evetech.net/latest/incursions/?datasource=tranquility'
     data = rq.get(url)
     jsData = data.json()
 
-    #Init var to store incursions
-    incursions = []
+    if method == 'EVEPY':
+        #Init var to store incursions
+        incursions = []
 
-    #Set lenght for loop. yay
-    length = len(jsData)
+        #Set lenght for loop. yay
+        length = len(jsData)
 
-    # Every loop incursion data will be read by __parseIncursionData(). It then gets added to var Incursions.
-    for i in range(length):
-        # Add data to var Incursion.
-        incursions.append(__parseIncursionData(jsData, i))
-        
-        # If Dev mode, print some debug. Can be toggled in settings.py
-        if settings.developerMode == 1:
-            print(incursions[i].constellation_id)
+        # Every loop incursion data will be read by __parseIncursionData(). It then gets added to var Incursions.
+        for i in range(length):
+            # Add data to var Incursion.
+            incursions.append(__parseIncursionData(jsData, i))
+            # If Dev mode, print some debug. Can be toggled in settings.py
+            if settings.developerMode == 1:
+                print(incursions[i].constellation_id)
 
-    return incursions
+        return incursions
+
+    else:
+        # Returns the RAW JSON data. Can be sued to make your own structues etc.
+        return jsData
 
 # Basically parses the input data in a decent manner. No comments needed really.
 def __parseIncursionData(jsData, i):
