@@ -1,11 +1,13 @@
-#Created by IAmSalt Salty
+# EVEPy - EVE Online Library for Python
+# Copyright (C) 2020 - AtherActive
+# View terms in LICENSE.txt file.
 import main as api
 import terminal_messages as msg
 from time import sleep
 
 
 def PrintData():
-    data = api.PullIncursionData()
+    data = api.PullIncursionData('EVEPY')
     id = 0
     lenght = len(data)
 
@@ -28,7 +30,6 @@ def PrintData():
     data[i].systems_names,
     data[i].status))
     id = id +1
-# ^^^ As of right now this system is being replaced and is NOT working.
 
 def retry():
     choice = input(msg.retry)

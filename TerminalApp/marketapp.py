@@ -1,13 +1,15 @@
-# Created by IAmSalt Salty. Owned by AtherActive
+# EVEPy - EVE Online Library for Python
+# Copyright (C) 2020 - AtherActive
+# View terms in LICENSE.txt file.
 import main as api
 import terminal_messages as msg
 
 
 def PrintData(id):
-    url = 'https://evemarketer.com/types/{}'.format(api.PullDataFromAPI(id).itemID)
+    data = api.PullDataFromAPI(id)
+    url = 'https://evemarketer.com/types/{}'.format(data.itemID)
 
-# Due to a bug I have to request the data again for every field. Otherwise it for some reason cannot read data.
-# A fix is coming later once Flutter is up and running.
+
     print('''
 ****************-Market Info-****************
    Processed Item: {}
@@ -29,17 +31,17 @@ def PrintData(id):
 ****************-Market Info-****************
 '''
           .format(
-        api.PullDataFromAPI(id).itemID,
-        api.PullDataFromAPI(id).friendlyName,
+        data.itemID,
+        data.friendlyName,
 
-        api.PullDataFromAPI(id).buyValues.avgPrice,
-        api.PullDataFromAPI(id).buyValues.volume,
-        api.PullDataFromAPI(id).buyValues.maxPrice,
-        api.PullDataFromAPI(id).buyValues.minPrice,
-        api.PullDataFromAPI(id).sellValues.avgPrice,
-        api.PullDataFromAPI(id).sellValues.volume,
-        api.PullDataFromAPI(id).sellValues.maxPrice,
-        api.PullDataFromAPI(id).sellValues.minPrice,
+        data.buyValues.avgPrice,
+        data.buyValues.volume,
+        data.buyValues.maxPrice,
+        data.buyValues.minPrice,
+        data.sellValues.avgPrice,
+        data.sellValues.volume,
+        data.sellValues.maxPrice,
+        data.sellValues.minPrice,
         url
                   )
     )

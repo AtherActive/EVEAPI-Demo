@@ -1,4 +1,6 @@
-# Created by IAmSalt Salty. Owned by AtherActive
+# EVEPy - EVE Online Library for Python
+# Copyright (C) 2020 - AtherActive
+# View terms in LICENSE.txt file.
 
 import json as js
 import requests as rq
@@ -7,8 +9,8 @@ import settings
 import csv
 
 
-
 # Market related stuff
+
 def ImportMarketData():
     print('''
     ******************************************
@@ -84,8 +86,6 @@ def PullItemID(itemname):
 
     return output
 
-# itemDB = ImportMarketData()
-
 
 #Incursion related stuff
 
@@ -157,11 +157,6 @@ def ResolveSystemNames(id, mode='constellation'):
             output_name.append(jsData[i]['solarsystemname'])
     
     return output_name
-if settings.developerMode == 1:
 
-    icdata = PullIncursionData()
-    print('external data check:')
-    length = len(icdata)
-
-    for i in range(length):
-        print(icdata[i].constellation_id)
+# Required init.
+itemDB = ImportMarketData()

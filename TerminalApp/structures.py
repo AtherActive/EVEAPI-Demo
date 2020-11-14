@@ -1,4 +1,6 @@
-# Created by IAmSalt Salty. Owned by AtherActive
+# EVEPy - EVE Online Library for Python
+# Copyright (C) 2020 - AtherActive
+# View terms in LICENSE.txt file.
 
 from dataclasses import dataclass
 
