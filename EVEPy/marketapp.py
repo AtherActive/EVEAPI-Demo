@@ -60,7 +60,6 @@ def app_pre():
 
 def app_start():
     print(msg.startup)
-    id = -1
 
     name = input(msg.inputValue)
 
