@@ -1,56 +1,22 @@
-# EVEPy - EVE Online Library for Python
-# Copyright (C) 2020 - AtherActive
-# View terms in LICENSE.txt file.
-import os
+import setuptools
 
-def startSetup():
+with open("README.md", "r") as fh:
+    long_description = fh.read()
 
-    os.system('echo *** Starting installation ***')
-    print('')
-
-    os.system('echo ** Installing requests **')
-    os.system('pip install requests')
-
-    print('Installation complete.')
-
-    print('''
-    ***************Finished****************
-    * Setup has finished with the install *
-    * Hope you enjoy! - AtherActive       *
-    *  (You can now close this terminal)  *
-    ***************************************
-    
-    ''')
-
-def app_start():
-    option = input('''
-    *****************Install******************
-    * Welcome to the EVEAPIDEMO Installation!*
-    *                                        *
-    * The script will do some required setup *
-    * now. (Installing dependencies.)        *
-    *                                        *
-    *    Type "start" once you are ready!    *
-    ******************************************
-    ''')
-
-    try:
-        if option == 'start':
-            startSetup()
-        else:
-            print('''
-**********Error**********
-* An error occured. Try *
-* again please!  :(     *
-*************************
-            ''')
-
-    except:
-         print('''
-**********Error**********
-* An error occured. Try *
-* again please!  :(     *
-*************************
-            ''')
-
-app_start()
+setuptools.setup(
+    name="EVEPy-saltylelele", # Replace with your own username
+    version="0.0.1",
+    author="Julian G",
+    author_email="iamsalt@atheractive.net",
+    description="A Python library for the EVE Online API.",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    url="https://github.com/atheractive/evepy",
+    packages=setuptools.find_packages(),
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ],
+    python_requires='>=3.6',
+)
