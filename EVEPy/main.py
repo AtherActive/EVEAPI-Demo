@@ -11,6 +11,7 @@ import csv
 
 # Market related stuff
 
+# If this function fails the app should close anyway, as it cannot function without this. No try statement is added here.
 def ImportMarketData():
     print('''
     ******************************************
@@ -32,19 +33,22 @@ def UpdateMarketValues(data, name, id=-1):
     # create structure for storage purposes
     dataStruct = stru.MarketItem()
 
-    # sets all values.....
-    dataStruct.itemID = id
-    dataStruct.friendlyName = name
+    try:
+        # sets all values.....
+        dataStruct.itemID = id
+        dataStruct.friendlyName = name
 
-    dataStruct.buyValues.avgPrice = data[0]['buy']['avg']
-    dataStruct.buyValues.volume = data[0]['buy']['volume']
-    dataStruct.buyValues.maxPrice = data[0]['buy']['max']
-    dataStruct.buyValues.minPrice = data[0]['buy']['min']
+        dataStruct.buyValues.avgPrice = data[0]['buy']['avg']
+        dataStruct.buyValues.volume = data[0]['buy']['volume']
+        dataStruct.buyValues.maxPrice = data[0]['buy']['max']
+        dataStruct.buyValues.minPrice = data[0]['buy']['min']
 
-    dataStruct.sellValues.avgPrice = data[0]['sell']['avg']
-    dataStruct.sellValues.volume = data[0]['sell']['volume']
-    dataStruct.sellValues.maxPrice = data[0]['sell']['max']
-    dataStruct.sellValues.minPrice = data[0]['sell']['min']
+        dataStruct.sellValues.avgPrice = data[0]['sell']['avg']
+        dataStruct.sellValues.volume = data[0]['sell']['volume']
+        dataStruct.sellValues.maxPrice = data[0]['sell']['max']
+        dataStruct.sellValues.minPrice = data[0]['sell']['min']
+    except data:
+        print("An error occured while updating market values. Please try again or report this issue on Github.")
 
     # debug :D
     if settings.developerMode == 1:
@@ -62,15 +66,19 @@ def UpdateMarketValues(data, name, id=-1):
 # does what it says. Takes the data form the API.
 def PullDataFromAPI(name):
 
-    url = 'https://api.evemarketer.com/ec/marketstat/json?typeid={}'.format(PullItemID(name))
-    data = rq.get(url)
-    jsData = data.json()
+    try:
+        url = 'https://api.evemarketer.com/ec/marketstat/json?typeid={}'.format(PullItemID(name))
+        data = rq.get(url)
+        jsData = data.json()
 
-    if settings.developerMode == 1:
-        stru.PrintS("Received from {}: ".format(url), jsData)
+        if settings.developerMode == 1:
+            stru.PrintS("Received from {}: ".format(url), jsData)
 
 
-    itemStruct = UpdateMarketValues(jsData, name, PullItemID(name))
+        itemStruct = UpdateMarketValues(jsData, name, PullItemID(name))
+    except:
+        print('An error occured while pulling data from the API. This may be a connection issue.')
+        itemStruct = stru.MarketItem()
 
     return itemStruct
 
@@ -92,42 +100,51 @@ def PullItemID(itemname):
 def PullIncursionData(method=str('EVEPY')):
     #Pulls data from URL and converts it into JSON
     url = 'https://esi.evetech.net/latest/incursions/?datasource=tranquility'
-    data = rq.get(url)
-    jsData = data.json()
+    try:
+        data = rq.get(url)
+        jsData = data.json()
+    except ConnectionError:
+        print('A connection error occured. Are you online?')
+    
+    try:
+        if method == 'EVEPY':
+            #Init var to store incursions
+            incursions = []
 
-    if method == 'EVEPY':
-        #Init var to store incursions
-        incursions = []
+            #Set lenght for loop. yay
+            length = len(jsData)
 
-        #Set lenght for loop. yay
-        length = len(jsData)
+            # Every loop incursion data will be read by __parseIncursionData(). It then gets added to var Incursions.
+            for i in range(length):
+                # Add data to var Incursion.
+                incursions.append(__parseIncursionData(jsData, i))
+                # If Dev mode, print some debug. Can be toggled in settings.py
+                if settings.developerMode == 1:
+                    print(incursions[i].constellation_id)
 
-        # Every loop incursion data will be read by __parseIncursionData(). It then gets added to var Incursions.
-        for i in range(length):
-            # Add data to var Incursion.
-            incursions.append(__parseIncursionData(jsData, i))
-            # If Dev mode, print some debug. Can be toggled in settings.py
-            if settings.developerMode == 1:
-                print(incursions[i].constellation_id)
-
-        return incursions
-
-    else:
-        # Returns the RAW JSON data. Can be sued to make your own structues etc.
-        return jsData
+            return incursions
+        else:
+            # Returns the RAW JSON data. Can be sued to make your own structues etc.
+            return jsData
+    except:
+        print('Something went wrong while processing data. Please report this on our Github page.')
 
 # Basically parses the input data in a decent manner. No comments needed really.
 def __parseIncursionData(jsData, i):
-    icstruct = stru.Incursion()
+    try:
+        icstruct = stru.Incursion()
 
-    icstruct.constellation_id = jsData[i]['constellation_id']
-    icstruct.constellation_name = 'none'
-    icstruct.staging = jsData[i]['staging_solar_system_id']
-    icstruct.region_name = ResolveSystemNames(icstruct.constellation_id, 'con-reg')
-    icstruct.status = jsData[i]['state']
-    icstruct.systems_id = jsData[i]['infested_solar_systems']
-    icstruct.systems_names = ResolveSystemNames(jsData[i]['infested_solar_systems'], 'system')
-    icstruct.staging_name = ResolveSystemNames(jsData[i]['staging_solar_system_id'])
+        icstruct.constellation_id = jsData[i]['constellation_id']
+        icstruct.constellation_name = 'none'
+        icstruct.staging = jsData[i]['staging_solar_system_id']
+        icstruct.region_name = ResolveSystemNames(icstruct.constellation_id, 'con-reg')
+        icstruct.status = jsData[i]['state']
+        icstruct.systems_id = jsData[i]['infested_solar_systems']
+        icstruct.systems_names = ResolveSystemNames(jsData[i]['infested_solar_systems'], 'system')
+        icstruct.staging_name = ResolveSystemNames(jsData[i]['staging_solar_system_id'])
+    except:
+        print('An error occured while updating Incursion values. Please report this issue on our Github page.')
+        icstruct = stru.Incursion()
 
     return icstruct
     
@@ -136,26 +153,33 @@ def ResolveSystemNames(id, mode='constellation'):
     #init value
     output_name = 'none'
 
-    # If constellation, pull data and find region name.
-    if mode == 'con-reg':
-        url = 'https://www.fuzzwork.co.uk/api/mapdata.php?constellationid={}&format=json'.format(id)
-        data = rq.get(url)
-        jsData = data.json()
-        output_name = jsData[0]['regionname']
-    
-    # Pulls system name form Fuzzwork.co.uk. 
-    elif mode == 'system':
-        #Convert output to a list.
-        output_name = []
-        lenght = len(id)
-        # Pulls system name from Fuzzwork. Not that hard.
-        for i in range(lenght):
-            url = 'https://www.fuzzwork.co.uk/api/mapdata.php?solarsystemid={}&format=json'.format(id[i])
+    try:
+        # If constellation, pull data and find region name.
+        if mode == 'con-reg':
+            url = 'https://www.fuzzwork.co.uk/api/mapdata.php?constellationid={}&format=json'.format(id)
             data = rq.get(url)
             jsData = data.json()
-
-            output_name.append(jsData[i]['solarsystemname'])
+            output_name = jsData[0]['regionname']
     
+    # Pulls system name form Fuzzwork.co.uk. 
+        elif mode == 'system':
+            #Convert output to a list.
+            output_name = []
+            lenght = len(id)
+            # Pulls system name from Fuzzwork. Not that hard.
+            for i in range(lenght):
+                url = 'https://www.fuzzwork.co.uk/api/mapdata.php?solarsystemid={}&format=json'.format(id[i])
+                data = rq.get(url)
+                jsData = data.json()
+
+                output_name.append(jsData[i]['solarsystemname'])
+                
+    except ConnectionError:
+        print('A connection error occured. Are you online?')
+
+    except:
+        print('An error occured while updating system information. Please report this on Github fi it is not a connection issue.')
+        
     return output_name
 
 # Required init.

@@ -6,11 +6,12 @@ import terminal_messages as msg
 
 
 def PrintData(id):
-    data = api.PullDataFromAPI(id)
-    url = 'https://evemarketer.com/types/{}'.format(data.itemID)
+    try:
+        data = api.PullDataFromAPI(id)
+        url = 'https://evemarketer.com/types/{}'.format(data.itemID)
 
 
-    print('''
+        print('''
 ****************-Market Info-****************
    Processed Item: {}
    Name:           {}              
@@ -45,7 +46,8 @@ def PrintData(id):
         url
                   )
     )
-
+    except:
+        print('Terminal was unable to pull data from API. This may be due to a connection error. If you are sure it is not your network, please report this on our Github page.')
 
 def retry():
     choice = input(msg.retry)
