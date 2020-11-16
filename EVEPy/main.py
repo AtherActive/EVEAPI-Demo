@@ -193,11 +193,8 @@ def PullAllianceIDList(datasource='tranquility'):
         #Debug codes
         if settings.statusCodes == 1:
             print(data.status_code)
-
-        if data.status_code == 200:
-            return data.json()
-        else:
-            Exception()
+            
+        return data.json()
     except ConnectionError:
         print('A connection error occured. Please check your connection.')
     except:
@@ -221,12 +218,12 @@ def PullNPCCorpsID(datasource='tranquility'):
 
 # Currently not active due to some issues.
 def PullFWWars(method='EVEPy'):
-    active = 0
+    active = 0 # Currently disabled this function for future expansion purposes
     if active == 1:
         try:
             url = 'https://esi.evetech.net/latest/fw/wars/?datasource=tranquility'
             data = rq.get(url)
-            jsdata = data.json
+            jsdata = data.json()
 
             return jsdata
         except:
@@ -234,7 +231,15 @@ def PullFWWars(method='EVEPy'):
     else:
         print('Function is not supported at the moment.')
 
+### Industry index list
+
+def PullIndyIndexList(method='JSON'):
+    url = 'https://esi.evetech.net/latest/industry/systems/?datasource=tranquility'
+    data = rq.get(url)
+    jsData = data.json()
+
+    if method == 'JSON':
+        return jsData
 
 # Required init.
 itemDB = ImportMarketData()
-print(PullFWWars('JSON'))
