@@ -19,6 +19,10 @@ class MarketItem:
     buyValues = ItemValues()
     sellValues = ItemValues()
 
+@dataclass
+class FactionWars:
+    name = 'null'
+
 
 @dataclass
 class Incursion:

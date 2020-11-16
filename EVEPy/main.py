@@ -9,7 +9,7 @@ import settings
 import csv
 
 
-# Market related stuff
+### Market related stuff
 
 # If this function fails the app should close anyway, as it cannot function without this. No try statement is added here.
 def ImportMarketData():
@@ -95,7 +95,7 @@ def PullItemID(itemname):
     return output
 
 
-#Incursion related stuff
+#### Incursion related stuff
 
 def PullIncursionData(method=str('EVEPY')):
     #Pulls data from URL and converts it into JSON
@@ -182,5 +182,59 @@ def ResolveSystemNames(id, mode='constellation'):
         
     return output_name
 
+### Alliances List
+
+# Pulls raw JSON data from API about alliances.
+def PullAllianceIDList(datasource='tranquility'):
+    try:
+        url = 'https://esi.evetech.net/latest/alliances/?datasource={}'.format(datasource)
+        data = rq.get(url)
+
+        #Debug codes
+        if settings.statusCodes == 1:
+            print(data.status_code)
+
+        if data.status_code == 200:
+            return data.json()
+        else:
+            Exception()
+    except ConnectionError:
+        print('A connection error occured. Please check your connection.')
+    except:
+        print('An error occured. Please read the detailed message if needed.')
+
+### NPC Corps
+
+def PullNPCCorpsID(datasource='tranquility'):
+    try:
+        url = 'https://esi.evetech.net/latest/corporations/npccorps/?datasource={}'.format(datasource)
+        data = rq.get(url)
+
+        if settings.statusCodes == 1:
+            print(data.status_code)
+        
+        return data.json()
+    except:
+        print('An error occured.')
+
+### Factional Warfare
+
+# Currently not active due to some issues.
+def PullFWWars(method='EVEPy'):
+    active = 0
+    if active == 1:
+        try:
+            url = 'https://esi.evetech.net/latest/fw/wars/?datasource=tranquility'
+            data = rq.get(url)
+            jsdata = data.json
+
+            return jsdata
+        except:
+            print('An error occured while pulling FW Data.')
+    else:
+        print('Function is not supported at the moment.')
+
+
 # Required init.
 itemDB = ImportMarketData()
+print(PullFWWars('JSON'))

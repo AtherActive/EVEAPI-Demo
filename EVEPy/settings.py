@@ -7,6 +7,9 @@
 # Toggle DEV Mode for debugging
 developerMode = 0
 
+# Toggle Status codes for certain operations.
+statusCodes = 0
+
 #Auto update. Currently not implemented just yet.
 autoUpdate = 0
 
