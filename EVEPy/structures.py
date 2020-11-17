@@ -21,7 +21,8 @@ class MarketItem:
 
 @dataclass
 class FactionWars:
-    name = 'null'
+    attackerID = -1
+    defenderID = -1
 
 
 @dataclass
