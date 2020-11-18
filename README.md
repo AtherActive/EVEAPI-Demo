@@ -11,7 +11,7 @@ EVEPy is a Python library (Work In Progress) that hooks into the eve API. It als
 # Dependencies
 - requests
 
-# Installation
+# Installation (Not recommended)
 To use EVEPy in your project, you will have to manually install it. This is due to it still being in active development, and packaging at this stage is not worth it. It is highly recommended to check this page for updates at least every other week. Now, let's get going!
 1. Download this repository.
 2. Create a folder inside your project. (I recommend calling it "EVEPy", as documentation will reference it like this)
