@@ -219,7 +219,7 @@ def PullNPCCorpsID(datasource='tranquility'):
 # Currently not active due to some issues.
 def PullFWWars(method='EVEPy'):
     active = 0 # Currently disabled this function for future expansion purposes
-    if active == 1:
+    if method == 'JSON':
         try:
             url = 'https://esi.evetech.net/latest/fw/wars/?datasource=tranquility'
             data = rq.get(url)
@@ -229,7 +229,23 @@ def PullFWWars(method='EVEPy'):
         except:
             print('An error occured while pulling FW Data.')
     else:
-        print('Function is not supported at the moment.')
+        url = 'https://esi.evetech.net/latest/fw/wars/?datasource=tranquility'
+        data = rq.get(url)
+        jsdata = data.json()
+
+
+        fwList = [stru.FactionWars()]
+
+        leng = len(jsdata)
+
+        for i in range(leng):
+            x = stru.FactionWars()
+
+            x.attackerID = jsdata[i]['faction_id']
+            x.defenderID = jsdata[i]['against_id']
+            fwList.append(x)
+    return fwList
+        
 
 ### Industry index list
 
@@ -243,3 +259,9 @@ def PullIndyIndexList(method='JSON'):
 
 # Required init.
 itemDB = ImportMarketData()
+
+data = PullFWWars('JSON')
+lng = len(data)
+
+for i in range(lng):
+    print(data[i])
