@@ -19,7 +19,7 @@ def runFile(path):
         if addpath == 1:
             system('python {}{}{}'.format(os.getcwd(), '/EVEPy/', path))
         else:
-            system('python \{}{}'.format(os.getcwd(), path))
+            system('python {}\{}'.format(os.getcwd(), path))
     except:
         print('An error ocurred during runtime. Please report this on github, as this is not intended!')
 
@@ -29,7 +29,7 @@ def app_run():
     999: Exit
     001: MarketApp
     002: IncursionApp
-    801: Toggle AddPath (default=on)
+    801: Toggle AddPath (default=on) [Disabled. To disable open file and change value to 0 manually]
     ''')
     # Decide what you want to do
     option = input()
@@ -38,17 +38,20 @@ def app_run():
         exit()
 
     # 800+ is config numbers.
-    elif option == '801':
+    # Wether you want to use addpath feature.
+    elif option == '800':
         if addpath == 1:
             addpath = 0
         else:
             addpath = 1
         app_run()
 
+    # Market app
     elif option == '001':
         runFile('marketapp.py')
         app_run()
-
+    
+    # Incursion App
     elif option == '002':
         runFile('incursionapp.py')
         app_run()
