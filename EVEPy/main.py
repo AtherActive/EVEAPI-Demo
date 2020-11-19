@@ -218,7 +218,6 @@ def PullNPCCorpsID(datasource='tranquility'):
 
 # Currently not active due to some issues.
 def PullFWWars(method='EVEPy'):
-    active = 0 # Currently disabled this function for future expansion purposes
     if method == 'JSON':
         try:
             url = 'https://esi.evetech.net/latest/fw/wars/?datasource=tranquility'
@@ -232,7 +231,6 @@ def PullFWWars(method='EVEPy'):
         url = 'https://esi.evetech.net/latest/fw/wars/?datasource=tranquility'
         data = rq.get(url)
         jsdata = data.json()
-
 
         fwList = [stru.FactionWars()]
 
@@ -265,3 +263,8 @@ lng = len(data)
 
 for i in range(lng):
     print(data[i])
+
+# Some demo. Using this later.
+#stringtest = 'demo demo'
+#new = stringtest.replace(' ', '%20')
+#print(new)
