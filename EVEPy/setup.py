@@ -1,3 +1,6 @@
+# EVEPy - EVE Online Library for Python
+# Copyright (C) 2020 - AtherActive
+# View terms in LICENSE.txt file.
 import setuptools
 
 with open("README.md", "r") as fh:

@@ -13,6 +13,9 @@ statusCodes = 0
 #Auto update. Currently not implemented just yet.
 autoUpdate = 0
 
+# Addpath feature used in the menu
+addpath = 1
+
 # Version number used by AutoUpdate
 version = '0.1.0'
 

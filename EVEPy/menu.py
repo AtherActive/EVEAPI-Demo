@@ -8,15 +8,50 @@
 
 
 from os import system
-import os
 from time import sleep
+import os
+import settings
 
-# A var used to decide wether to add a path or not. Only needed if you cannot open any files here.
-addpath = 1
+def configMode():
+    print('''
+***********
+Config Mode
+***********
+    801: Toggle Addpath (Required for running out of editor)
+    802: Toggle Developer Mode (Shows some more debug data.)
+    999: Quit to menu  
+    ''')
+
+    option = input()
+
+    # Wether you want to use addpath feature. Needed if running inside editor
+    if option == '801':
+        if settings.addpath == 1:
+            settings.addpath = 0
+            print(settings.addpath)
+            configMode()
+        else:
+            settings.addpath = 1
+            print(settings.addpath)
+            configMode()
+
+    # Toggle developer mode
+    elif option == '802':
+        if settings.developerMode == 1:
+            settings.developerMode = 0
+            print(settings.developerMode)
+            configMode()
+        else:
+            settings.developerMode = 1
+            print(settings.developerMode)
+            configMode()
+
+    elif option == '999':
+        app_run()
 
 def runFile(path):
     try:
-        if addpath == 1:
+        if settings.addpath == 1:
             system('python {}{}{}'.format(os.getcwd(), '/EVEPy/', path))
         else:
             system('python {}\{}'.format(os.getcwd(), path))
@@ -25,11 +60,13 @@ def runFile(path):
 
 def app_run():
     print('''
-    Menu Demo text
+**************
+Developer Menu
+**************
     999: Exit
     001: MarketApp
     002: IncursionApp
-    801: Toggle AddPath (default=on) [Disabled. To disable open file and change value to 0 manually]
+    800: Enter config mode
     ''')
     # Decide what you want to do
     option = input()
@@ -38,13 +75,8 @@ def app_run():
         exit()
 
     # 800+ is config numbers.
-    # Wether you want to use addpath feature.
     elif option == '800':
-        if addpath == 1:
-            addpath = 0
-        else:
-            addpath = 1
-        app_run()
+        configMode()
 
     # Market app
     elif option == '001':
@@ -54,5 +86,8 @@ def app_run():
     # Incursion App
     elif option == '002':
         runFile('incursionapp.py')
+        app_run()
+    else:
+        print('This command does not exist.')
         app_run()
 app_run()
