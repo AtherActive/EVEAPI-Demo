@@ -258,12 +258,6 @@ def PullIndyIndexList(method='JSON'):
 # Required init.
 itemDB = ImportMarketData()
 
-data = PullFWWars('JSON')
-lng = len(data)
-
-for i in range(lng):
-    print(data[i])
-
 # Some demo. Using this later.
 #stringtest = 'demo demo'
 #new = stringtest.replace(' ', '%20')
