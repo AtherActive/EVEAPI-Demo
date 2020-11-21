@@ -5,7 +5,7 @@
 #This file is mostly some settings for debug and other things. Yeah that's it.
 
 # Toggle DEV Mode for debugging
-developerMode = 0
+developerMode = 1
 
 # Toggle Status codes for certain operations.
 statusCodes = 0

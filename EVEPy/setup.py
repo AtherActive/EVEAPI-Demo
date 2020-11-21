@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="EVEPy-saltylelele", # Replace with your own username
+    name="EVEPy-saltylelele", 
     version="0.0.1",
     author="Julian G",
     author_email="iamsalt@atheractive.net",

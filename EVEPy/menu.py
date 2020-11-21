@@ -54,7 +54,7 @@ def runFile(path):
         if settings.addpath == 1:
             system('python {}{}{}'.format(os.getcwd(), '/EVEPy/', path))
         else:
-            system('python {}\{}'.format(os.getcwd(), path))
+            system('python {}/{}'.format(os.getcwd(), path))
     except:
         print('An error ocurred during runtime. Please report this on github, as this is not intended!')
 
@@ -90,4 +90,5 @@ Developer Menu
     else:
         print('This command does not exist.')
         app_run()
+        
 app_run()
