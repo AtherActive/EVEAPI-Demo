@@ -63,10 +63,10 @@ def app_run():
 **************
 Developer Menu
 **************
-    999: Exit
     001: MarketApp
     002: IncursionApp
     800: Enter config mode
+    999: Exit
     ''')
     # Decide what you want to do
     option = input()

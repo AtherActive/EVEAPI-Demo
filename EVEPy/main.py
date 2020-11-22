@@ -2,11 +2,13 @@
 # Copyright (C) 2020 - AtherActive
 # View terms in LICENSE.txt file.
 
+import webbrowser as wb
 import json as js
 import requests as rq
 import structures as stru
 import settings
 import csv
+
 
 
 ### Market related stuff
@@ -272,8 +274,16 @@ def PullIndyIndexList(method='JSON'):
     if method == 'JSON':
         return jsData
 
+# Authenticate With EVE Online
+def SSOAuthPlayer(applicationurl='none'):
+    wb.open(applicationurl)
+
+
 # Required init.
 itemDB = ImportMarketData()
+
+
+SSOAuthPlayer('https://login.eveonline.com/oauth/authorize?response_type=code&redirect_uri=http://localhost/oath-callback&client_id=5fda8f7c49f94f46a2dc7e0a6fd36aec&scope=esi-characters.read_standings.v1')
 
 # Some demo. Using this later.
 #stringtest = 'demo demo'
