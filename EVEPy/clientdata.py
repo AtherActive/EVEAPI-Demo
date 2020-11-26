@@ -10,4 +10,4 @@
 client_sso_token = ''
 client_sso_access_code = ''
 client_sso_id = -1
-cleint_sso_name = ''
+client_sso_name = ''

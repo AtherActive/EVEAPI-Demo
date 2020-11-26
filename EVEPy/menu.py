@@ -60,9 +60,9 @@ def runFile(path):
 
 def app_run():
     print('''
-**************
-Developer Menu
-**************
+****************
+*Developer Menu*
+****************
     001: MarketApp
     002: IncursionApp
     800: Enter config mode
